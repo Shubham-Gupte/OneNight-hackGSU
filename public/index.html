@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+ <html> 
+    <head>
+        <meta charset="utf-8">
+        <title>Chat Page</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="socket.io/socket.io.js"></script>
+        <!--jQuery Used For Some Frontend Tasks-->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="client.js" defer></script>
+
+        <title>ANYWHEREWOLF</title>
+
+    <!-- Bootstrap core CSS -->
+	    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	    <!-- Custom fonts for this template -->
+	    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+	    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+	    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+	    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	    <!-- Custom styles for this template -->
+	    <link href="css/agency.min.css" rel="stylesheet">
+    </head>
+    <body id="page-top">
+
+    	<header class="masthead">
+	      <div class="container">
+	        <div class="intro-text">
+	          <div class="intro-heading text-uppercase">ANYWHEREWOLF</div>
+	          <!-- <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="create.html">CREATE</a> -->
+	          <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger"
+	          id="createGame">CREATE</a>
+	          <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" 
+	          id="joinGame">JOIN</a>
+	      </div>
+	    </header>
+        <!--socket.io.js is automatically added by node-->
+        <!-- Previous chat code -->
+      <!--  <p id="stat"><strong>Status:</strong>Not Connected</p>
+       <h2>Socket.io Chat Tutorial:</h2>
+       <ul></ul>
+       <input id="field" placeholder="Wait..." type="text">
+       <input type="button" value="Go" id="btn"> -->
+
+        <!-- <script>
+            //Connecting To socket.io
+            var socket = io.connect(window.location.host);
+            socket.on("Start_Chat",function(){
+                //Setting Message On Connection..
+                $("#stat").html("<strong>Status:</strong>Connected");
+                $("#field").attr("placeholder","Your Name..");
+                $("#field").focus();              
+            })
+            socket.on("disconnect",function(){
+                //Setting Message On Disconnection
+                $("#stat").html("<strong>Status:</strong>Disconnected From Server Refresh!");
+            })
+            $("#btn").click(function(){
+                if($("#field").attr("placeholder") ==="Your Name.."){
+                     socket.emit("Register_Name",$("#field").val());
+                     $("#field").val("");
+                     $("#field").attr("placeholder","Your Text..");
+                } else if($("#field").attr("placeholder") == "Your Text.."){
+                     socket.emit("Send_msg",$("#field").val());
+                     $("#field").val("");
+                     $("#field").focus();
+                }else alert("Wait...");
+            })
+            socket.on("r_name",function(data){
+                $("ul").append("<li>"+data+"</li>");
+            })
+            socket.on("msg",function(data){
+                $("ul").append("<li>"+data+"</li>");
+            })
+        </script>  -->
+
+
+    </body>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Contact form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/agency.min.js"></script>
+
+</html>
