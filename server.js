@@ -76,7 +76,12 @@ io.sockets.on("connection",function(socket){
 			userList = Object.keys(users)
 			for(var i = 0; i < userList.length; i++) {
 				selectedRoles[randomizedArray[i]] = userList[i]
+			} for(var i = userList.length; i < randomizedArray.length; i++) {
+				selectedRoles[randomizedArray[i]] = 'CENTER'
 			}
+			// for(var i = 0; i < userList.length-3; i++) {
+			// 	selectedRoles[randomizedArray[i]] = userList[i]
+			// }
 			console.log("selected Roles: ", selectedRoles) 
        	}
     })
