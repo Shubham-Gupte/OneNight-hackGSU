@@ -8,7 +8,8 @@ numUsers = 0
 numPlayers = 0
 roles = {	"Werewolf1":"Werewolf", "Werewolf2":"Werewolf",
 			"Minion":"Minion", "Seer":"Seer", "Mason1":"Mason",
-			"Mason2":"Mason", "Robber":"Robber",
+			"Mason2":"Mason", "Robber":"Robber", "Villager1": 'Villager',
+      "Villager2": 'Villager', "Villager3": 'Villager'
 
 		}//full list of roles?
 selectedRoles = {} //(Role: socketID)
@@ -34,9 +35,6 @@ io.sockets.on("connection",function(socket){
        users[socket.id] = data
        console.log(users)
        console.log(Object.keys(users).length )
-       if(Object.keys(users).length == 5) {
-       	console.log("deploy cards for the game");
-       }
        //Now Listening To A Chat Message
        socket.on("Send_msg",function(data){
        io.sockets.emit("msg",data);
@@ -60,30 +58,42 @@ io.sockets.on("connection",function(socket){
        		//permute the players
        		var currentIndex = array.length, temporaryValue, randomIndex;
 
-			// While there remain elements to shuffle...
-			while (0 !== currentIndex) {
+    			// While there remain elements to shuffle...
+    			while (0 !== currentIndex) {
 
-				// Pick a remaining element...
-			    randomIndex = Math.floor(Math.random() * currentIndex);
-			    currentIndex -= 1;
+    				// Pick a remaining element...
+    			    randomIndex = Math.floor(Math.random() * currentIndex);
+    			    currentIndex -= 1;
 
-			    // And swap it with the current element.
-			    temporaryValue = array[currentIndex];
-			    array[currentIndex] = array[randomIndex];
-			    array[randomIndex] = temporaryValue;
-			}
-			randomizedArray = array
-			userList = Object.keys(users)
-			for(var i = 0; i < userList.length; i++) {
-				selectedRoles[randomizedArray[i]] = userList[i]
-			} for(var i = userList.length; i < randomizedArray.length; i++) {
-				selectedRoles[randomizedArray[i]] = 'CENTER'
-			}
-			// for(var i = 0; i < userList.length-3; i++) {
-			// 	selectedRoles[randomizedArray[i]] = userList[i]
-			// }
-			console.log("selected Roles: ", selectedRoles) 
-       	}
+    			    // And swap it with the current element.
+    			    temporaryValue = array[currentIndex];
+    			    array[currentIndex] = array[randomIndex];
+    			    array[randomIndex] = temporaryValue;
+    			}
+    			randomizedArray = array
+    			userList = Object.keys(users)
+    			for(var i = 0; i < userList.length; i++) {
+    				selectedRoles[randomizedArray[i]] = userList[i]
+    			} for(var i = userList.length; i < randomizedArray.length; i++) {
+    				selectedRoles[randomizedArray[i]] = 'CENTER';
+    			}
+    			// for(var i = 0; i < userList.length-3; i++) {
+    			// 	selectedRoles[randomizedArray[i]] = userList[i]
+    			// }
+    			console.log("selected Roles: ", selectedRoles);
+          io.sockets.emit( "timeToStart");
+          console.log('sent');
+         }
+    })
+
+    socket.on('request_Role', function(data) {
+      console.log('socketID: ', data)
+      Object.keys(selectedRoles).forEach(function(element) {
+        console.log('Element: ', element)
+        if (selectedRoles[element] == data) {
+          io.sockets.emit("yourUserIs", [data, roles[element]] );
+        }
+      })
     })
     socket.on("shuffle",function(array){
   //   	var currentIndex = array.length, temporaryValue, randomIndex;
